@@ -1,0 +1,29 @@
+.secondaryRuneTreeContainer{
+    width: 100%;
+    display: flex;
+    justify-items: start;
+    align-items: center;
+    margin-left: -5vw;
+}
+
+.secondaryRuneTreeContainer.vertical{  
+    flex-direction: column;
+    padding-top: 12vw;
+}
+
+.secondaryRuneTreeContainer.horizontal{
+    flex-direction: row;
+}
+
+.secondaryRuneTreeContainer .rune{
+    width: 50%;
+    margin-top: 3vw;
+}
+
+.secondaryRuneTreeContainer .statRune{
+    width: 30%;
+}
+
+.secondaryRuneTreeContainer .statRune.first{
+    margin-top: 10vw;
+}

@@ -1,0 +1,14 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "moduleResolution": "node",
+        "module": "ESNext",
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "noImplicitAny": false
+      },
+      "include": ["**/*"]
+}

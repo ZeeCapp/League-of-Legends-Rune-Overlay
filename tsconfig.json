@@ -1,0 +1,15 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "module": "CommonJS",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "build/server",
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "noImplicitAny": false
+      },
+      "include": ["src/server/**/*"]
+}

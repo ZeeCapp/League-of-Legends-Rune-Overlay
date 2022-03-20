@@ -1,0 +1,23 @@
+.primaryRuneTreeContainer{
+    width: 100%;
+    display: flex;
+    justify-items: start;
+    align-items: center;
+}
+
+.primaryRuneTreeContainer.vertical{  
+    flex-direction: column;
+}
+
+.primaryRuneTreeContainer.horizontal{
+    flex-direction: row;
+}
+
+.primaryRuneTreeContainer .keystone{
+    width: 100%;
+}
+
+.primaryRuneTreeContainer .rune{
+    width: 50%;
+    margin-top: 3vw;
+}
