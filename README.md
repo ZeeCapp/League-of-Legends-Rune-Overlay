@@ -6,7 +6,7 @@
 **League of Legends Rune Overlay** is a simple node.js web-app that can be used to display an overlay with your currently chosen runes
 on your stream. It can be used with any streaming software that is able to embed a web view.
 
-![Overlay preview](https://drive.google.com/uc?export=view&id=1CGfS83mkT-PNNmi1aG0eXvcLCsJ78oL2)
+![Overlay preview](https://drive.google.com/uc?id=1CGfS83mkT-PNNmi1aG0eXvcLCsJ78oL2)
 
 The overlay can be manually scaled in your streaming software.
 
