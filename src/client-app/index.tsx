@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RuneOverlayApp from './RuneOverlayApp';
-import {BrowserRouter, Routes, Route,} from "react-router-dom"
-import Settings from "./Settings"
+import App from "./App"
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/settings' element={ <Settings/> } />
-        <Route path='/'  element={ <RuneOverlayApp /> } />       
-      </Routes>
-    </BrowserRouter>
+    <App></App>
   </React.StrictMode>,
   document.getElementById('root')
 );

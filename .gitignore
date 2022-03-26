@@ -5,3 +5,6 @@ node_modules/
 # Ignore build and dist folders
 build/
 dist/
+
+# Ignore the user settings static file
+settings.json

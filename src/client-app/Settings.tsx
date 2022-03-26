@@ -1,8 +1,9 @@
 import React from "react";
+import UserSettings from "../shared/UserSettings"
 
-const Settings = () => {
+const Settings = (props: {userSettings: UserSettings}) => {
     return(
-        <div>Settings</div>
+        <div>{JSON.stringify(props.userSettings)}</div>
     )
 }
 

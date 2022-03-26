@@ -1,11 +1,10 @@
 import React from "react";
 import { Rune } from "./shared/Rune";
-import { StatRune } from "./shared/StatRune";
 import "./SecondaryRuneTree.css"
 
 export type SecondaryRuneTreeParams = {
     runes: Rune[],
-    stats: StatRune[]
+    stats: Rune[]
 }
 
 export class SecondaryRuneTree extends React.Component<SecondaryRuneTreeParams>{

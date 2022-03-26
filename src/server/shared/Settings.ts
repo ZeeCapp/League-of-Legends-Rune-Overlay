@@ -1,5 +1,7 @@
 import * as fs from "fs"
 
+import UserSettings from "../../shared/UserSettings"
+
 async function writeFileAsync(path, data): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         fs.writeFile(
@@ -37,7 +39,7 @@ async function SaveOrCreateSettings(settings: any) {
     })
 }
 
-async function ReadSettings(): Promise<any|null> {
+async function ReadSettings(): Promise<UserSettings | null> {
     return new Promise<any|null>((resolve, reject) => {
         fs.access("settings.json", async (err) => {
             if(err) {
