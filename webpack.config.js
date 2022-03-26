@@ -6,7 +6,8 @@ const config = {
   entry: './src/client-app/index.tsx',
   output: {
     path: path.resolve(__dirname, 'build/client-app'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: "/"
   },
   devtool: "source-map",
   module: {
@@ -46,6 +47,7 @@ const config = {
     },
     hot: true,
     port: 3001,
+    historyApiFallback: true
   },
   plugins: [
     new MiniCssExtractPlugin({filename: "bundle.css"}),

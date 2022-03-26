@@ -11,7 +11,7 @@ const app = express();
 
 GetFreePort(3000).then(port => {
 
-    app.use(settingsRouter);
+    app.use("/api", settingsRouter);
 
     //use proxy to riots client-api, since it doesn't use a access-control-allow-origin, we can't access it directly from
     //the browser
@@ -41,6 +41,10 @@ GetFreePort(3000).then(port => {
     else {
         app.use(express.static(path.join(__dirname, "../client-app")));
     }
+
+    app.get("/settings", (req, res) => {
+        res.send();
+    });
 
     app.listen(port, "127.0.0.1", () => {
         console.log(`You can open the league rune overlay in your browser using URL 127.0.0.1:${port}`);

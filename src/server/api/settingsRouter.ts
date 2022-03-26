@@ -1,12 +1,12 @@
 import * as express from "express"
 import * as bodyParser from "body-parser"
-import {SaveOrCreateSettings, ReadSettings} from "../shared/HelperFunctions"
+import {SaveOrCreateSettings, ReadSettings} from "../shared/Settings"
 
 const settingsRouter = express.Router();
 
 settingsRouter.use(bodyParser.json());
 
-settingsRouter.route("/api/settings")
+settingsRouter.route("/settings")
     .get(async (req, res) => {
         try{
             const settings = await ReadSettings();
