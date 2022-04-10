@@ -5,8 +5,8 @@ enum DisplayType{
 }
 
 type UserSettings = {
-    display: DisplayType | undefined
-    displayForMS: number | undefined
+    display: DisplayType | undefined | null
+    displayDurationSeconds: number | undefined | null
 }
 
 export default UserSettings;

@@ -10,7 +10,11 @@ settingsRouter.route("/settings")
     .get(async (req, res) => {
         try{
             const settings = await ReadSettings();
-            res.send(settings ? settings : {});
+            if(settings) {
+                res.send(settings);
+                return;
+            }
+            res.sendStatus(204);
         }
         catch{
             res.sendStatus(500);

@@ -42,9 +42,7 @@ GetFreePort(3000).then(port => {
         app.use(express.static(path.join(__dirname, "../client-app")));
     }
 
-    app.get("/settings", (req, res) => {
-        res.send();
-    });
+    app.get("*", (req, res) => {res.sendFile(path.join(__dirname, "../client-app/index.html"))})
 
     app.listen(port, "127.0.0.1", () => {
         console.log(`You can open the league rune overlay in your browser using URL 127.0.0.1:${port}`);

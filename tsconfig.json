@@ -1,11 +1,11 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "CommonJS",
         "removeComments": true,
         "preserveConstEnums": true,
-        "outDir": "build/server",
+        "outDir": "build",
         "sourceMap": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
