@@ -3,46 +3,56 @@ import axios from "axios"
 
 import { PrimaryRuneTree, PrimaryRuneTreeParams } from "./PrimaryRuneTree";
 import { SecondaryRuneTree, SecondaryRuneTreeParams } from "./SecondaryRuneTree";
-
 import "./RuneOverlay.css"
 
 const DDragonBaseUrl: string = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/";
 
 type RuneOverlayState = {
-    runesData: any
-    playerInGame: boolean,
+    runesData: any,
+    timerFinished: boolean,
+    displayed: boolean,
     primaryRuneTreeData: PrimaryRuneTreeParams | undefined,
     secondaryRuneTreeData: SecondaryRuneTreeParams | undefined
 }
 
-export default class RuneOverlay extends React.Component<{}, RuneOverlayState>{
+export default class RuneOverlay extends React.Component<{ displayDurationSeconds?: number }, RuneOverlayState>{
     constructor(props: object) {
         super(props);
 
         this.state = {
-            playerInGame: false,
+            displayed: false,
+            timerFinished: false,
             runesData: {},
             primaryRuneTreeData: undefined,
             secondaryRuneTreeData: undefined
         }
     }
 
-    checkForGameTimer: NodeJS.Timeout | null = null;
+    checkForGameTimer: NodeJS.Timeout | undefined = null;
+    displayTimer: NodeJS.Timer | null = null;
 
     async checkForGame() {
         try {
-            let result = (await axios.get("/api/riot-client-proxy/liveclientdata/activeplayerrunes"));
+            let result = await axios.get("/api/riot-client-proxy/liveclientdata/activeplayerrunes");
+
             if (result.status == 200) {
                 let parsedRunes = this.parseRuneData(result.data);
-                this.setState({ playerInGame: true, primaryRuneTreeData: parsedRunes[0], secondaryRuneTreeData: parsedRunes[1] });
+                this.setState({
+                    primaryRuneTreeData: parsedRunes[0],
+                    secondaryRuneTreeData: parsedRunes[1],
+                    displayed: !this.state.timerFinished ? true : false
+                });
+
+                if (this.props.displayDurationSeconds && !this.state.timerFinished)
+                    this.displayTimer = setTimeout(() => { this.setState({ timerFinished: true, displayed: false }) }, this.props.displayDurationSeconds * 1000);
             }
             else {
-                this.setState({ playerInGame: false })
+                if (this.displayTimer?.hasRef()) clearTimeout(this.displayTimer);
+                this.setState({ displayed: false, timerFinished: false })
             }
         }
         catch {
-            console.log("Error");
-            this.setState({ playerInGame: false });
+            this.setState({ displayed: false, timerFinished: false });
         }
     }
 
@@ -91,10 +101,11 @@ export default class RuneOverlay extends React.Component<{}, RuneOverlayState>{
 
     componentWillUnmount() {
         if (this.checkForGameTimer) clearInterval(this.checkForGameTimer);
+        if (this.displayTimer) clearTimeout(this.displayTimer);
     }
 
     render() {
-        if (this.state.playerInGame && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData) {
+        if (this.state.displayed && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData) {
             return (
                 <div className="runesContainer">
                     <PrimaryRuneTree {...this.state.primaryRuneTreeData}></PrimaryRuneTree>

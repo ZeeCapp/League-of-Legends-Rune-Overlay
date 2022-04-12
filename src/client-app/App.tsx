@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
-import RuneOverlay from "./RuneOverlay"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Settings from "./Settings"
-import UserSettings, {DisplayType} from "../shared/UserSettings"
 import axios from "axios"
+import { setTimeout, clearTimeout } from "node:timers"
+
+import RuneOverlay from "./RuneOverlay"
+import Settings from "./Settings"
+import UserSettings, { DisplayType } from "../shared/UserSettings"
 
 const App = () => {
     const [settings, setSettings] = useState<UserSettings>();
@@ -13,19 +15,19 @@ const App = () => {
             await axios.post("/api/settings", settings);
             setSettings(settings);
         }
-        catch(e){
+        catch (e) {
             console.log("Error saving settings:", e);
         }
     }
 
     useEffect(() => {
-        axios.get("/api/settings")
+        axios.get<UserSettings>("/api/settings")
             .then(async (response) => {
-                if(response.status == 200){
+                if (response.status == 200) {
                     setSettings(response.data);
                     return;
                 }
-                setSettings({display: DisplayType.vertical, displayDurationSeconds: null});
+                setSettings({ display: DisplayType.vertical, displayDurationSeconds: null });
             })
             .catch((err) => {
                 console.log("Error getting settings:", err);
@@ -38,7 +40,13 @@ const App = () => {
                 <Route path="/settings" element={
                     <Settings userSettings={settings} onSettingsSaved={saveSettings}></Settings>
                 } />
-                <Route path='/' element={<RuneOverlay />} />
+                <Route 
+                path='/' 
+                element={
+                    <RuneOverlay 
+                        displayDurationSeconds={(settings?.displayDurationSeconds) ? settings.displayDurationSeconds : undefined} 
+                    />} 
+                />
             </Routes>
         </BrowserRouter>
     )
