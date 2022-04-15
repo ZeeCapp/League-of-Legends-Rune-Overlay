@@ -1,7 +1,7 @@
 
 .settings__container{
     display: flex;
-    width: 500px;
+    max-width: 500px;
     margin: auto;
     align-items: center;
     flex-direction: column;
