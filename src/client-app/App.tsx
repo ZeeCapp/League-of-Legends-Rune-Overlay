@@ -44,7 +44,7 @@ const App = () => {
                 path='/' 
                 element={
                     <RuneOverlay 
-                        displayDurationSeconds={(settings?.displayDurationSeconds) ? settings.displayDurationSeconds : undefined} 
+                        userSettings={settings} 
                     />} 
                 />
             </Routes>

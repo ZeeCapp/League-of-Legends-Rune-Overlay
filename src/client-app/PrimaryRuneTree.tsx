@@ -3,17 +3,18 @@ import { Rune } from "./shared/Rune";
 import "./PrimaryRuneTree.css"
 
 export type PrimaryRuneTreeParams = {
-    runes: Rune[]
+    runes: Rune[],
+    horizontal?: boolean
 }
 
 export class PrimaryRuneTree extends React.Component<PrimaryRuneTreeParams>{
     render(){
         return(
-            <div className="primaryRuneTreeContainer vertical">
+            <div className={`primaryRuneTreeContainer ${this.props.horizontal ? "horizontal" : "vertical"}`}>
             {
                 this.props.runes.map((rune, index) => {
                     return(
-                        <img src={rune.imgUrl} className={index == 0 ? "keystone" : "rune"} key={index}></img>
+                            <img src={rune.imgUrl}  className={index == 0 ? "keystone" : "rune"} key={index} />
                     )
                 })
             }

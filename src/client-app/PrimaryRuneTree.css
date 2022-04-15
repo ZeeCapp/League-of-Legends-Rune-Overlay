@@ -1,11 +1,11 @@
 .primaryRuneTreeContainer{
     width: 100%;
     display: flex;
-    justify-items: start;
-    align-items: center;
+    justify-content: stretch;
+    align-items: center; 
 }
 
-.primaryRuneTreeContainer.vertical{  
+.primaryRuneTreeContainer.vertical{
     flex-direction: column;
 }
 
@@ -13,11 +13,24 @@
     flex-direction: row;
 }
 
-.primaryRuneTreeContainer .keystone{
+.primaryRuneTreeContainer.vertical .keystone{
     width: 100%;
 }
 
-.primaryRuneTreeContainer .rune{
-    width: 50%;
-    margin-top: 3vw;
+.primaryRuneTreeContainer.horizontal .keystone{
+    flex: 2;
+    width: 128px;
 }
+
+.primaryRuneTreeContainer.vertical .rune{
+    margin-top: 2vw;
+    width: 50%;
+}
+
+.primaryRuneTreeContainer.horizontal .rune{
+    margin-left: 2vw;
+    flex: 1;
+    object-fit: contain;
+    width: 128px;
+}
+  

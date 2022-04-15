@@ -4,13 +4,14 @@ import "./SecondaryRuneTree.css"
 
 export type SecondaryRuneTreeParams = {
     runes: Rune[],
-    stats: Rune[]
+    stats: Rune[],
+    horizontal?: boolean
 }
 
 export class SecondaryRuneTree extends React.Component<SecondaryRuneTreeParams>{
     render(){
         return(
-            <div className="secondaryRuneTreeContainer vertical">
+            <div className={`secondaryRuneTreeContainer ${this.props.horizontal ? "horizontal" : "vertical"}`}>
             {
                 this.props.runes.map((rune, index) => {
                     return(

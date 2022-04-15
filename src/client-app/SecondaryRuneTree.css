@@ -1,29 +1,48 @@
 .secondaryRuneTreeContainer{
-    width: 100%;
+    width: 95vw;
     display: flex;
     justify-items: start;
     align-items: center;
-    margin-left: -5vw;
 }
 
-.secondaryRuneTreeContainer.vertical{  
-    flex-direction: column;
+.secondaryRuneTreeContainer.vertical{
     padding-top: 12vw;
+    flex-direction: column;
+    margin-left: -10vw;
 }
 
 .secondaryRuneTreeContainer.horizontal{
     flex-direction: row;
+    margin-left: 5vw;
 }
 
-.secondaryRuneTreeContainer .rune{
-    width: 50%;
+.secondaryRuneTreeContainer.vertical .rune{
     margin-top: 3vw;
+    object-fit: contain;
+    width: 50%;
 }
 
-.secondaryRuneTreeContainer .statRune{
-    width: 30%;
+.secondaryRuneTreeContainer.horizontal .rune{
+    width: 128px;
+    flex: 0.35;
+    margin-left: 3vw;
+    object-fit: contain;
 }
 
-.secondaryRuneTreeContainer .statRune.first{
-    margin-top: 10vw;
+.secondaryRuneTreeContainer.vertical .statRune{
+    width: 40%;
+}
+
+.secondaryRuneTreeContainer.horizontal .statRune{
+    width: 128px;
+    flex: 0.3;
+    object-fit: contain;
+}
+
+.secondaryRuneTreeContainer.vertical .statRune.first{
+    margin-top: 5vw;
+}
+
+.secondaryRuneTreeContainer.horizontal .statRune.first{
+    margin-left: 5vw;
 }

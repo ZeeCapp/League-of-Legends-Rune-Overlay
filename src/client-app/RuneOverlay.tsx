@@ -3,6 +3,7 @@ import axios from "axios"
 
 import { PrimaryRuneTree, PrimaryRuneTreeParams } from "./PrimaryRuneTree";
 import { SecondaryRuneTree, SecondaryRuneTreeParams } from "./SecondaryRuneTree";
+import UserSettings, { DisplayType } from "../shared/UserSettings"
 import "./RuneOverlay.css"
 
 const DDragonBaseUrl: string = "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/";
@@ -15,8 +16,8 @@ type RuneOverlayState = {
     secondaryRuneTreeData: SecondaryRuneTreeParams | undefined
 }
 
-export default class RuneOverlay extends React.Component<{ displayDurationSeconds?: number }, RuneOverlayState>{
-    constructor(props: object) {
+export default class RuneOverlay extends React.Component<{ userSettings: UserSettings }, RuneOverlayState>{
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -27,6 +28,7 @@ export default class RuneOverlay extends React.Component<{ displayDurationSecond
             secondaryRuneTreeData: undefined
         }
     }
+
 
     checkForGameTimer: NodeJS.Timeout | undefined = null;
     displayTimer: NodeJS.Timer | null = null;
@@ -43,8 +45,8 @@ export default class RuneOverlay extends React.Component<{ displayDurationSecond
                     displayed: !this.state.timerFinished ? true : false
                 });
 
-                if (this.props.displayDurationSeconds && !this.state.timerFinished)
-                    this.displayTimer = setTimeout(() => { this.setState({ timerFinished: true, displayed: false }) }, this.props.displayDurationSeconds * 1000);
+                if (this.props.userSettings.displayDurationSeconds && !this.state.timerFinished)
+                    this.displayTimer = setTimeout(() => { this.setState({ timerFinished: true, displayed: false }) }, this.props.userSettings.displayDurationSeconds * 1000);
             }
             else {
                 if (this.displayTimer?.hasRef()) clearTimeout(this.displayTimer);
@@ -107,9 +109,9 @@ export default class RuneOverlay extends React.Component<{ displayDurationSecond
     render() {
         if (this.state.displayed && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData) {
             return (
-                <div className="runesContainer">
-                    <PrimaryRuneTree {...this.state.primaryRuneTreeData}></PrimaryRuneTree>
-                    <SecondaryRuneTree {...this.state.secondaryRuneTreeData}></SecondaryRuneTree>
+                <div className={`runesContainer ${this.props.userSettings.display == DisplayType.horizontal ? "horizontal" : ""}`}>
+                    <PrimaryRuneTree {...this.state.primaryRuneTreeData} horizontal={this.props.userSettings.display == DisplayType.horizontal ? true : false} />
+                    <SecondaryRuneTree {...this.state.secondaryRuneTreeData} horizontal={this.props.userSettings.display == DisplayType.horizontal ? true : false} />
                 </div>
             )
         }
