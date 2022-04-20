@@ -11,5 +11,6 @@
         "jsx": "react",
         "noImplicitAny": false
       },
-      "include": ["src/server/**/*"]
+      "include": ["src/**/*"],
+      "exclude": ["src/client-app/**/*"]
 }

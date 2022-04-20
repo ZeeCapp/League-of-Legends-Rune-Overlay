@@ -1,4 +1,8 @@
 {
+  "author": {
+    "name": "Jan Ligač"
+  },
+  "main": "build/main.js",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -19,6 +23,7 @@
     "build": "npm-run-all -p build:* -s package",
     "start": "node build/server/main.js",
     "dev:tsc": "tsc -w",
+    "electron": "electron ./build/main.js",
     "dev:webpack": "webpack serve --mode=development",
     "dev:server": "nodemon --watch build/server build/server/main.js --env dev",
     "build:server": "tsc",
@@ -34,6 +39,7 @@
     "@types/react-dom": "^17.0.13",
     "@types/tcp-port-used": "^1.0.1",
     "css-loader": "^6.7.1",
+    "electron": "^18.0.4",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.0",
     "minimist": "^1.2.5",
