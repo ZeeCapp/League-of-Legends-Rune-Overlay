@@ -1,15 +1,14 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "target": "es6",
-        "module": "CommonJS",
-        "removeComments": true,
+        "target": "es5",
+        "moduleResolution": "node",
+        "module": "ESNext",
         "preserveConstEnums": true,
-        "outDir": "build",
         "sourceMap": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "react",
         "noImplicitAny": false
       },
-      "include": ["src/client-app-server/**/*", "src/electron/main/**/*"],
+      "include": ["**/*"]
 }

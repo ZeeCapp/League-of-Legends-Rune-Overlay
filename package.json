@@ -2,7 +2,6 @@
   "author": {
     "name": "Jan Ligač"
   },
-  "main": "build/main.js",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -20,14 +19,15 @@
   },
   "scripts": {
     "dev": "npm-run-all -p dev:*",
-    "build": "npm-run-all -p build:* -s package",
-    "start": "node build/server/main.js",
+    "build": "npm-run-all -p build:*",
+    "start": "electron ./build/electron/main/main.js --mode development",
     "dev:tsc": "tsc -w",
     "electron": "electron ./build/main.js",
     "dev:webpack": "webpack serve --mode=development",
     "dev:server": "nodemon --watch build/server build/server/main.js --env dev",
-    "build:server": "tsc",
-    "build:client-app": "webpack --mode=production",
+    "build:typescript": "tsc",
+    "build:electron": "webpack --config webpack.config.electron.js --mode=production",
+    "build:client-app": "webpack --config webpack.config.client-app.js --mode=production",
     "package": "pkg build/server/main.js --out-path dist -c package.json"
   },
   "devDependencies": {

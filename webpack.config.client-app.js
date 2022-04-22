@@ -3,10 +3,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: './src/client-app/index.tsx',
+  entry: "./src/client-app/index.tsx", 
   output: {
-    path: path.resolve(__dirname, 'build/client-app'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, './build/client-app'),
+    filename: '[name].js',
     publicPath: "/"
   },
   devtool: "source-map",
