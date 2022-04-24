@@ -46,7 +46,7 @@ const config = {
       directory: path.join(__dirname, '/build/electron/renderer'),
     },
     hot: true,
-    port: 3001,
+    port: 3002,
     historyApiFallback: true
   },
   plugins: [

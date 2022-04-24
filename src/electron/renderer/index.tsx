@@ -9,3 +9,7 @@ ReactDOM.render(
     </React.StrictMode>,
     document.querySelector("#root")
 );
+
+if ((module as any).hot) {
+    (module as any).hot.accept();
+  }
