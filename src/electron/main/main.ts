@@ -4,17 +4,22 @@ import webpackDevServerReady from "./WebpackDevServerHelper";
 
 const appArgs: any = minimist(process.argv.slice(2));
 
-const createWindow = () => {
+const createWindow = async () => {
     const win = new BrowserWindow({
         width: 1000,
         height: 600,
-        autoHideMenuBar: true
+        autoHideMenuBar: appArgs?.env != "dev" ? true : false
     })
 
-    if(appArgs?.env == "dev"){
-        webpackDevServerReady("127.0.0.1:3002").then(()=>{
-            win.loadURL("127.0.0.1:3002");
-        })     
+    if(appArgs?.env == "dev"){        
+        try{
+            await webpackDevServerReady("127.0.0.1:3002");
+            win.loadURL("http://127.0.0.1:3002");
+            win.webContents.openDevTools();
+        } 
+        catch(err){
+            console.log(err);
+        }    
     }
     else{
         win.loadFile('../renderer/index.html');
