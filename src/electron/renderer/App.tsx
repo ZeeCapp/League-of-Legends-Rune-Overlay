@@ -1,8 +1,24 @@
 import React from "react"
+import { HashRouter, Routes, Route } from "react-router-dom"
+
+import WaitScreen from "./WaitScreen"
+import Settings from "./Settings"
 
 const App = () => {
     return (
-        <div>Hello, I'm an electron front end! lol ;)</div>
+    <HashRouter>
+        <Routes>
+            <Route path="/settings" element={
+                <Settings onSettingsSaved={(settings)=>{}}></Settings>
+            } />
+            <Route 
+            path='/' 
+            element={
+              <WaitScreen></WaitScreen>
+            } 
+            />
+        </Routes>
+    </HashRouter>
     )
 }
 

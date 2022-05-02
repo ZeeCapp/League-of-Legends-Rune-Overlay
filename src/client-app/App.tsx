@@ -40,7 +40,7 @@ const App = () => {
                     <Settings userSettings={settings} onSettingsSaved={saveSettings}></Settings>
                 } />
                 <Route 
-                path='/' 
+                path='' 
                 element={
                     <RuneOverlay 
                         userSettings={settings} 

@@ -1,0 +1,12 @@
+
+.settings__container{
+    display: flex;
+    max-width: 500px;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    height: 89vh;
+}
