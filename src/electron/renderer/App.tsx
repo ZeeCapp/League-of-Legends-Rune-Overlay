@@ -9,7 +9,7 @@ const App = () => {
     <HashRouter>
         <Routes>
             <Route path="/settings" element={
-                <Settings onSettingsSaved={(settings)=>{}}></Settings>
+                <Settings></Settings>
             } />
             <Route 
             path='/' 

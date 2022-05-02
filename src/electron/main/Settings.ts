@@ -26,7 +26,7 @@ async function readFileAsync(path): Promise<string> {
     })
 }
 
-async function SaveOrCreateSettings(settings: any) {
+async function SaveOrCreateSettings(settings: UserSettings) {
     fs.access("settings.json", async (err) => {
         if (err) {
             await writeFileAsync("settings.json", settings);

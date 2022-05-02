@@ -6,18 +6,31 @@ import Tooltip from "@mui/material/Tooltip"
 import Box from "@mui/system/Box";
 import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress"
 import { Link } from "react-router-dom";
 
 import UserSettings, { DisplayType } from "../../shared/UserSettings"
 import "./Settings.css"
 
-const Settings = (props: { userSettings?: UserSettings, onSettingsSaved: (userSettings: UserSettings) => void }) => {
+const Settings = () => {
     const [settings, setUserSettings] = useState<UserSettings>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        setUserSettings(props.userSettings);
-    }, [props.userSettings]);
+        window.electronAPI.handleLoadSetting()
+            .then(settings => {
+                setUserSettings(settings);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                window.alert("Error loading settings " + err);
+            })
+    }, [])
+
+    const saveSettings = (settings: UserSettings) => {
+        window.electronAPI.handleSaveSettings(JSON.stringify(settings));
+    }
 
     const handleSelectInput = (e) => {
         setUserSettings({ ...settings, display: e.target.value as DisplayType });
@@ -27,6 +40,23 @@ const Settings = (props: { userSettings?: UserSettings, onSettingsSaved: (userSe
         setUserSettings({ ...settings, displayDurationSeconds: Number.parseInt(e.target.value) });
     }
 
+    if (isLoading) return (
+        <Box sx={{ 
+            display: "flex",
+            flexDirection: "column", 
+            height: "90vh", 
+            width: "100%", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            fontFamily: "Roboto",
+            fontWeight: "200",
+            fontSize: "1.5em", 
+            gap: "20px"
+            }}>
+            <span>Loading settings...</span>
+            <CircularProgress></CircularProgress>
+        </Box>
+    )
 
     return (
         <div className="settings__container">
@@ -54,7 +84,7 @@ const Settings = (props: { userSettings?: UserSettings, onSettingsSaved: (userSe
                     <HelpOutlinedIcon />
                 </Tooltip>
             </Box>
-            <Button variant="contained" onClick={() => props.onSettingsSaved(settings)}>Save</Button>
+            <Button variant="contained" onClick={() => {saveSettings(settings)}}>Save</Button>
         </div>
     )
 }

@@ -16,7 +16,7 @@ type RuneOverlayState = {
     secondaryRuneTreeData: SecondaryRuneTreeParams | undefined
 }
 
-export default class RuneOverlay extends React.Component<{ userSettings: UserSettings }, RuneOverlayState>{
+export default class RuneOverlay extends React.Component<{ userSettings?: UserSettings }, RuneOverlayState>{
     constructor(props) {
         super(props);
 
