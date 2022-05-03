@@ -9,7 +9,7 @@ import { SaveOrCreateSettings, ReadSettings } from "./Settings"
 
 const appArgs: any = minimist(process.argv.slice(2));
 
-async function createWindow(preloadPath?: string) {
+function createWindow(preloadPath?: string) {
     const win = new BrowserWindow({
         width: 1000,
         height: 600,
@@ -30,7 +30,7 @@ GetFreePort().then(port => {
             try {
                 await webpackDevServerReady("127.0.0.1:3002");
                 clientAppServer.startServer(port);
-                win = await createWindow(path.join(__dirname, "./preload.js"));
+                win = await createWindow(path.join(__dirname, "./Preload.js"));
                 win.loadURL("http://127.0.0.1:3002");
                 win.webContents.openDevTools();
             }

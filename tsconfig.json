@@ -11,7 +11,8 @@
         "jsx": "react",
         "noImplicitAny": false,
         "strict": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "typeRoots": ["./node_modules/@types", "src/electron/renderer/types"]
       },
-      "include": ["src/client-app-server/**/*", "src/electron/main/**/*"],
+      "include": ["src/client-app-server/**/*", "src/electron/main/**/*"]
 }

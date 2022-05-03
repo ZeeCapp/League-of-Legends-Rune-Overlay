@@ -1,4 +1,4 @@
-import UserSettings from "../../shared/UserSettings"
+import UserSettings from "../../../shared/UserSettings"
 
 export interface IElectronAPI {
     handleLoadSetting: () => Promise<UserSettings>,
