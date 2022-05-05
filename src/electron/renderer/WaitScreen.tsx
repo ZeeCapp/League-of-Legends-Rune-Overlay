@@ -28,14 +28,11 @@ const PlayerInGameIndicator = () => {
     )
 }
 
-const WaitScreen = () => {
+const WaitScreen = (props: {playerInGame: boolean}) => {
     const [port, setPort] = useState<number>();
-    const [playerInGame, setPlayerInGame] = useState<boolean>(false);
 
     useEffect(() => {
         window.electronAPI.getCurrentPort().then(port => setPort(port));
-        window.electronAPI.playerInGame(() => { setPlayerInGame(true) });
-        window.electronAPI.playerNotInGame(() => { setPlayerInGame(false) });
     }, [])
 
     return (
@@ -50,7 +47,7 @@ const WaitScreen = () => {
             height: "90vh",
             gap: "20px"
         }}>
-            {playerInGame ? <PlayerInGameIndicator /> : <WaitingForGameIndicator />}
+            {props.playerInGame ? <PlayerInGameIndicator /> : <WaitingForGameIndicator />}
             <span style={{
                 marginTop: "100px"
             }}>

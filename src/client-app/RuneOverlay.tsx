@@ -29,7 +29,6 @@ export default class RuneOverlay extends React.Component<{ userSettings?: UserSe
         }
     }
 
-
     checkForGameTimer: NodeJS.Timeout | undefined = null;
     displayTimer: NodeJS.Timer | null = null;
 
@@ -45,15 +44,15 @@ export default class RuneOverlay extends React.Component<{ userSettings?: UserSe
                     displayed: !this.state.timerFinished ? true : false
                 });
 
-                if (this.props.userSettings.displayDurationSeconds && !this.state.timerFinished)
-                    this.displayTimer = setTimeout(() => { this.setState({ timerFinished: true, displayed: false }) }, this.props.userSettings.displayDurationSeconds * 1000);
+                if (this.props.userSettings?.displayDurationSeconds && !this.state.timerFinished)
+                    this.displayTimer = setTimeout(() => { this.setState({ timerFinished: true, displayed: false }) }, this.props.userSettings?.displayDurationSeconds * 1000);
             }
             else {
                 if (this.displayTimer?.hasRef()) clearTimeout(this.displayTimer);
                 this.setState({ displayed: false, timerFinished: false })
             }
         }
-        catch {
+        catch (err) {
             this.setState({ displayed: false, timerFinished: false });
         }
     }
@@ -109,9 +108,9 @@ export default class RuneOverlay extends React.Component<{ userSettings?: UserSe
     render() {
         if (this.state.displayed && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData) {
             return (
-                <div className={`runesContainer ${this.props.userSettings.display == DisplayType.horizontal ? "horizontal" : ""}`}>
-                    <PrimaryRuneTree {...this.state.primaryRuneTreeData} horizontal={this.props.userSettings.display == DisplayType.horizontal ? true : false} />
-                    <SecondaryRuneTree {...this.state.secondaryRuneTreeData} horizontal={this.props.userSettings.display == DisplayType.horizontal ? true : false} />
+                <div className={`runesContainer ${this.props.userSettings?.display == DisplayType.horizontal ? "horizontal" : ""}`}>
+                    <PrimaryRuneTree {...this.state.primaryRuneTreeData} horizontal={this.props.userSettings?.display == DisplayType.horizontal ? true : false} />
+                    <SecondaryRuneTree {...this.state.secondaryRuneTreeData} horizontal={this.props.userSettings?.display == DisplayType.horizontal ? true : false} />
                 </div>
             )
         }

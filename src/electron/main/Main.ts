@@ -11,12 +11,15 @@ import LeagueClient from "./LeagueClient";
 const appArgs: any = minimist(process.argv.slice(2));
 
 function createWindow(preloadPath?: string) {
-    const win = new BrowserWindow({
+    console.log(preloadPath ? path.join(__dirname, preloadPath) : undefined);
+
+     const win = new BrowserWindow({
         width: 1000,
         height: 600,
         autoHideMenuBar: appArgs?.env != "dev" ? true : false,
+        title: "League Rune Overlay",
         webPreferences: {
-            preload: preloadPath
+            preload: preloadPath ? path.join(__dirname, preloadPath) : undefined
         }
     })
     return win;
@@ -34,7 +37,7 @@ GetFreePort().then(port => {
             try {
                 await webpackDevServerReady("127.0.0.1:3002");
                 clientAppServer.startServer(port);
-                win = await createWindow(path.join(__dirname, "./Preload.js"));
+                win = await createWindow("Preload.js");
                 win.loadURL("http://127.0.0.1:3002");
                 win.webContents.openDevTools();
             }
@@ -43,8 +46,8 @@ GetFreePort().then(port => {
             }
         }
         else {
-            win = await createWindow();
-            win.loadFile('../renderer/index.html');
+            win = await createWindow("Preload.js");
+            win.loadFile(path.join(__dirname, "../renderer/index.html"));
         }
 
         leagueClient.monitorGameStatus(

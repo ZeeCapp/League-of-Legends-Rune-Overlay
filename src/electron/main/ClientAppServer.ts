@@ -19,7 +19,7 @@ export default class ClientAppServer {
     private useSettingsApi() {
         const settingsRouter = express.Router();
         settingsRouter.use(bodyParser.json());
-        settingsRouter.route("/settings")
+        settingsRouter.route("/")
             .get(async (req, res) => {
                 try {
                     const settings = await ReadSettings();
@@ -38,7 +38,7 @@ export default class ClientAppServer {
     }
 
     startServer(port: number) {
-        this.expressApp.use(this.useSettingsApi());
+        this.expressApp.use("/api/settings", this.useSettingsApi());
         this.expressApp.use("/api/riot-client-proxy", createProxyMiddleware(
             {
                 target: 'https://127.0.0.1:2999',
