@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { ipcRenderer } from "electron";
 
 const WaitingForGameIndicator = () => {
-    return(
+    return (
         <div style={{
             display: "flex",
             flexDirection: "column",
@@ -23,8 +23,8 @@ const WaitingForGameIndicator = () => {
 }
 
 const PlayerInGameIndicator = () => {
-    return(
-            <span>Player is currently in-game</span>
+    return (
+        <span>Player is currently in-game</span>
     )
 }
 
@@ -34,15 +34,9 @@ const WaitScreen = () => {
 
     useEffect(() => {
         window.electronAPI.getCurrentPort().then(port => setPort(port));
+        window.electronAPI.playerInGame(() => { setPlayerInGame(true) });
+        window.electronAPI.playerNotInGame(() => { setPlayerInGame(false) });
     }, [])
-
-    window.electronAPI.playerInGame((event, value) => {
-        setPlayerInGame(true)
-    });
-
-    window.electronAPI.playerNotInGame((event, value) => {
-        setPlayerInGame(false)
-    });
 
     return (
         <div style={{
@@ -56,7 +50,7 @@ const WaitScreen = () => {
             height: "90vh",
             gap: "20px"
         }}>
-            {playerInGame ? <PlayerInGameIndicator/> : <WaitingForGameIndicator/>}
+            {playerInGame ? <PlayerInGameIndicator /> : <WaitingForGameIndicator />}
             <span style={{
                 marginTop: "100px"
             }}>
