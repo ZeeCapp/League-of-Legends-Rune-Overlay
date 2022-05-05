@@ -1,9 +1,10 @@
-import UserSettings from "../../../shared/UserSettings"
+import UserSettings from "../../shared/UserSettings"
 
 export interface IElectronAPI {
     handleLoadSetting: () => Promise<UserSettings>,
     handleSaveSettings: (settings: string) => Promise<void>,
-    handlePlayerInGame: (callback) => void,
+    playerInGame: (callback) => void,
+    playerNotInGame: (callback) => void,
     getCurrentPort: () => Promise<number>
 }
 

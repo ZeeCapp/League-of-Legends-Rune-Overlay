@@ -25,7 +25,7 @@
     "dev:client-app": "webpack serve --config webpack.config.client-app.js --mode=development",
     "dev:electron-renderer": "webpack serve --config webpack.config.electron.js --mode=development",
     "dev:electron": "electron ./build/electron/main/Main.js --env=dev",
-    "build:typescript": "tsc",
+    "build:tsc": "tsc",
     "build:electron": "webpack --config webpack.config.electron.js --mode=production",
     "build:client-app": "webpack --config webpack.config.client-app.js --mode=production",
     "package": "pkg build/server/main.js --out-path dist -c package.json"

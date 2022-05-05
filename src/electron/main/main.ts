@@ -6,6 +6,7 @@ import webpackDevServerReady from "./WebpackDevServerHelper";
 import GetFreePort from "./ServerPortHelper";
 import ClientAppServer from "./ClientAppServer";
 import { SaveOrCreateSettings, ReadSettings } from "./Settings"
+import LeagueClient from "./LeagueClient";
 
 const appArgs: any = minimist(process.argv.slice(2));
 
@@ -25,7 +26,10 @@ function createWindow(preloadPath?: string) {
 GetFreePort().then(port => {
     app.whenReady().then(async () => {
         const clientAppServer = new ClientAppServer();
+        const leagueClient = new LeagueClient();
+
         let win: BrowserWindow;
+
         if (appArgs?.env == "dev") {
             try {
                 await webpackDevServerReady("127.0.0.1:3002");
@@ -42,6 +46,15 @@ GetFreePort().then(port => {
             win = await createWindow();
             win.loadFile('../renderer/index.html');
         }
+
+        leagueClient.monitorGameStatus(
+            () => {
+                win.webContents.send("playerInGame");
+            },
+            () => {
+                win.webContents.send("playerNotInGame");
+            }
+        )
 
         app.on('activate', () => {
             if (BrowserWindow.getAllWindows().length === 0) createWindow()
