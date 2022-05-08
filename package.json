@@ -58,9 +58,10 @@
   "build": {
     "appId": "League Rune Overlay",
     "artifactName": "Rune Overlay - ${os}.${ext}",
-    "files": ["build/*/**"],
+    "files": ["build/*/**", "static/*"],
     "win": {
-      "target": "portable"
+      "target": "portable",
+      "icon": "static/icon.png"
     }
   }
 }

@@ -1,4 +1,5 @@
 import * as fs from "fs"
+import * as path from "node:path/win32"
 
 import UserSettings from "../../shared/UserSettings"
 
@@ -15,6 +16,7 @@ async function writeFileAsync(path, data): Promise<void> {
 }
 
 async function readFileAsync(path): Promise<string> {
+    console.log(path);
     return new Promise<string>((resolve, reject) => {
         fs.readFile(
             path,
@@ -26,27 +28,27 @@ async function readFileAsync(path): Promise<string> {
     })
 }
 
-async function SaveOrCreateSettings(settings: UserSettings) {
-    fs.access("settings.json", async (err) => {
+async function SaveOrCreateSettings(dir: string, settings: UserSettings) {
+    fs.access(path.join(dir, "settings.json"), async (err) => {
         if (err) {
-            await writeFileAsync("settings.json", settings);
+            await writeFileAsync(path.join(dir, "settings.json"), settings);
         }
         else{
-            const result = JSON.parse(await readFileAsync("settings.json"));
+            const result = JSON.parse(await readFileAsync(path.join(dir, "settings.json")));
             const newSettings = {...result, ...settings};
-            await writeFileAsync("settings.json", newSettings)
+            await writeFileAsync(path.join(dir, "settings.json"), newSettings)
         }
     })
 }
 
-async function ReadSettings(): Promise<UserSettings | null> {
+async function ReadSettings(dir: string): Promise<UserSettings | null> {
     return new Promise<any|null>((resolve, reject) => {
-        fs.access("settings.json", async (err) => {
+        fs.access(path.join(dir, "settings.json"), async (err) => {
             if(err) {
                 resolve(null);
                 return;
             };
-            resolve(JSON.parse(await readFileAsync("settings.json")));
+            resolve(JSON.parse(await readFileAsync(path.join(dir, "settings.json"))));
         })
     })
 }

@@ -11,8 +11,6 @@ import LeagueClient from "./LeagueClient";
 const appArgs: any = minimist(process.argv.slice(2));
 
 function createWindow(preloadPath?: string) {
-    console.log(preloadPath ? path.join(__dirname, preloadPath) : undefined);
-
      const win = new BrowserWindow({
         width: 1000,
         height: 600,
@@ -28,8 +26,9 @@ function createWindow(preloadPath?: string) {
 
 GetFreePort().then(port => {
     app.whenReady().then(async () => {
-        const clientAppServer = new ClientAppServer();
         const leagueClient = new LeagueClient();
+        const userFileRootPath: string = app.getPath("userData");
+        const clientAppServer = new ClientAppServer(userFileRootPath);
 
         let win: BrowserWindow;
 
@@ -72,12 +71,11 @@ GetFreePort().then(port => {
         })
 
         ipcMain.handle("handleLoadSettings", async () => {
-            return await ReadSettings();
+            return await ReadSettings(userFileRootPath);
         })
 
         ipcMain.on("handleSaveSettings", (event, args) => {
-            console.log(args);
-            SaveOrCreateSettings(JSON.parse(args));
+            SaveOrCreateSettings(userFileRootPath, JSON.parse(args));
         })
     })
 })

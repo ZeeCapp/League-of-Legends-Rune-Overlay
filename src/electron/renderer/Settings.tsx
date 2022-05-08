@@ -1,3 +1,5 @@
+/// <reference types="../main/Preload" />
+
 import React, { useState, useEffect } from "react";
 import MenuItem from '@mui/material/MenuItem';
 import Button from "@mui/material/Button"

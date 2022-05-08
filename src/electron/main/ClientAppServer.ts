@@ -10,8 +10,10 @@ import { ReadSettings } from "./Settings"
 export default class ClientAppServer {
     private expressApp;
     private appArgs;
+    private userSettingsDir;
 
-    constructor() {
+    constructor(userSettingsDir: string) {
+        this.userSettingsDir = userSettingsDir;
         this.expressApp = express();
         this.appArgs = minimist(process.argv.slice(2));
     }
@@ -22,7 +24,7 @@ export default class ClientAppServer {
         settingsRouter.route("/")
             .get(async (req, res) => {
                 try {
-                    const settings = await ReadSettings();
+                    const settings = await ReadSettings(this.userSettingsDir);
                     if (settings) {
                         res.send(settings);
                         return;
