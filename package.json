@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "build/electron/main/Main.js",
   "author": {
-    "name": "Jan Ligač"
+    "name": "ZeeCapp"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -59,9 +59,9 @@
     "appId": "League Rune Overlay",
     "artifactName": "Rune Overlay - ${os}.${ext}",
     "files": ["build/*/**", "static/*"],
+    "icon": "static/icon.png",
     "win": {
-      "target": "portable",
-      "icon": "static/icon.png"
+      "target": "portable"    
     }
   }
 }

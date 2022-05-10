@@ -1,12 +1,22 @@
 
 # League of Legends Rune Overlay
 
-**League of Legends Rune Overlay** is a simple node.js web-app that can be used to display an overlay with your currently chosen runes
+**League of Legends Rune Overlay** is a simple Electron app that can be used to display an overlay with your currently chosen runes
 on your stream. It can be used with any streaming software that is able to embed a web view.
+
+This app gets all of its rune data from the [League Client API](https://developer.riotgames.com/docs/lol#league-client-api) and its rune images from [Comunity Dragon](https://www.communitydragon.org/). This ensures that you don't need to update the app unless you want to use new features or League Client API or Comunity Dragon make changes to their API that break backwards compatibility. 
 
 ![Overlay preview](https://githubfiles.blob.core.windows.net/images/overlay.png)
 
-*The overlay can be scaled in your streaming software.*
+*The overlay can be scaled and rotated in your streaming software.*
 
-### TODO:
-- add info on how to build the app from source into README
+## Build from source
+
+In order to build this app from source, follow these steps:
+- clone this repository and cd into it
+- run `npm install` (you need to have node and npm installed on your machine)
+- run `npm run build` - this will convert typescript files to javascript
+- run `npm run package` to build the final package
+
+## Planned features
+- Add transition animations to the rune overlay

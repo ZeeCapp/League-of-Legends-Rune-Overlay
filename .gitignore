@@ -8,3 +8,6 @@ dist/
 
 # Ignore the user settings static file
 settings.json
+
+# Ignore vscode files
+.vscode
