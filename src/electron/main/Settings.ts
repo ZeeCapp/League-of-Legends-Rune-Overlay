@@ -16,7 +16,6 @@ async function writeFileAsync(path, data): Promise<void> {
 }
 
 async function readFileAsync(path): Promise<string> {
-    console.log(path);
     return new Promise<string>((resolve, reject) => {
         fs.readFile(
             path,

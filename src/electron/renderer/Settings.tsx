@@ -62,8 +62,8 @@ const Settings = () => {
     return (
         <div className="settings__container">
             <Box sx={{ display: "flex", width: "100%", alignItems: "center" }}>
-                <Link to={"/"}>
-                    <Button sx={{ textDecoration: "none" }} onClick={() => { window.location.pathname = "/" }}>
+                <Link to="/">
+                    <Button sx={{ textDecoration: "none" }}>
                         <ArrowBackIcon />
                         <span>Back</span>
                     </Button>

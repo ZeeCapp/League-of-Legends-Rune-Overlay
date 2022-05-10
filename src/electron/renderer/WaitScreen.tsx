@@ -5,7 +5,6 @@ import CircularProgress from "@mui/material/CircularProgress"
 import Box from "@mui/system/Box";
 import Button from "@mui/material/Button"
 import { Link } from "react-router-dom";
-import { ipcRenderer } from "electron";
 
 const WaitingForGameIndicator = () => {
     return (
@@ -54,7 +53,7 @@ const WaitScreen = (props: {playerInGame: boolean}) => {
                 Overlay is available at <strong>127.0.0.1:{port}</strong>
             </span>
             <Box>
-                <Link to={"/settings"}>
+                <Link to="/settings">
                     <Button sx={{ textDecoration: "none" }}>
                         <span>Settings</span>
                     </Button>

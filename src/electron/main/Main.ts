@@ -46,7 +46,7 @@ GetFreePort().then(port => {
         }
         else {
             win = await createWindow("Preload.js");
-            win.loadFile(path.join(__dirname, "../renderer/index.html"));
+            win.loadURL(path.join("file://", __dirname, "../renderer/index.html"));
         }
 
         leagueClient.monitorGameStatus(
