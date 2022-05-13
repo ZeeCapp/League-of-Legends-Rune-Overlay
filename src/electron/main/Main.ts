@@ -11,7 +11,7 @@ import LeagueClient from "./LeagueClient";
 const appArgs: any = minimist(process.argv.slice(2));
 
 function createWindow(preloadPath?: string) {
-     const win = new BrowserWindow({
+    const win = new BrowserWindow({
         width: 1000,
         height: 600,
         autoHideMenuBar: appArgs?.env != "dev" ? true : false,
@@ -45,6 +45,7 @@ GetFreePort().then(port => {
             }
         }
         else {
+            clientAppServer.startServer(port);
             win = await createWindow("Preload.js");
             win.loadURL(path.join("file://", __dirname, "../renderer/index.html"));
         }

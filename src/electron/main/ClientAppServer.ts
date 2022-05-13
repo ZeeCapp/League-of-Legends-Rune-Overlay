@@ -36,7 +36,7 @@ export default class ClientAppServer {
                 }
             });
 
-            return settingsRouter;
+        return settingsRouter;
     }
 
     startServer(port: number) {
@@ -65,7 +65,7 @@ export default class ClientAppServer {
             this.expressApp.use(ReactDevServerProxy(3001));
         }
         else {
-            this.expressApp.use(express.static(path.join(__dirname, "../client-app")));
+            this.expressApp.use(express.static(path.join(__dirname, "../../client-app")));
         }
 
         this.expressApp.get("*", (req, res) => { res.sendFile(path.join(__dirname, "../client-app/index.html")) })

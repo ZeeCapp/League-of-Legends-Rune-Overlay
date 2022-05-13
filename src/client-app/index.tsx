@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App"
+import "../../assets/icon.png"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App></App>
-  </React.StrictMode>,
+  <App></App>,
   document.getElementById('root')
 );
 

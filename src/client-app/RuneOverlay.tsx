@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import { CSSTransition } from 'react-transition-group';
 
 import { PrimaryRuneTree, PrimaryRuneTreeParams } from "./PrimaryRuneTree";
 import { SecondaryRuneTree, SecondaryRuneTreeParams } from "./SecondaryRuneTree";
@@ -106,16 +107,13 @@ export default class RuneOverlay extends React.Component<{ userSettings?: UserSe
     }
 
     render() {
-        if (this.state.displayed && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData) {
-            return (
+        return (
+            <CSSTransition in={this.state.displayed && this.state.primaryRuneTreeData && this.state.secondaryRuneTreeData ? true : false} timeout={2000} classNames={"runesOverlay"} unmountOnExit>
                 <div className={`runesContainer ${this.props.userSettings?.display == DisplayType.horizontal ? "horizontal" : ""}`}>
                     <PrimaryRuneTree {...this.state.primaryRuneTreeData} horizontal={this.props.userSettings?.display == DisplayType.horizontal ? true : false} />
                     <SecondaryRuneTree {...this.state.secondaryRuneTreeData} horizontal={this.props.userSettings?.display == DisplayType.horizontal ? true : false} />
                 </div>
-            )
-        }
-        else {
-            return null;
-        }
+            </CSSTransition>
+        )
     }
 }
